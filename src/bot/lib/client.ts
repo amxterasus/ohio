@@ -1,6 +1,6 @@
-import { SapphireClient } from "@sapphire/framework";
-import { GatewayIntentBits, Partials } from "discord.js";
-import * as path from 'node:path'
+import * as path from 'node:path';
+import { SapphireClient } from '@sapphire/framework';
+import { GatewayIntentBits, Partials } from 'discord.js';
 
 class Client extends SapphireClient {
   public constructor() {
@@ -13,13 +13,13 @@ class Client extends SapphireClient {
       partials: [Partials.Channel, Partials.Message, Partials.Reaction],
       loadMessageCommandListeners: true,
       defaultPrefix: process.env.PREFIX,
-      baseUserDirectory: path.join(process.cwd(), 'src/bot')
+      baseUserDirectory: path.join(process.cwd(), 'src/bot'),
     });
   }
 
   public async start() {
     await this.login(process.env.TOKEN).catch((error) => {
-      console.error("Failed to login:", error);
+      console.error('Failed to login:', error);
     });
   }
 }

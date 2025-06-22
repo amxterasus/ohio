@@ -1,5 +1,5 @@
 export interface RaidOptions {
-  name: string,
-  link: string,
-  ping?: boolean,
+  name: string;
+  link: string;
+  ping?: boolean;
 }

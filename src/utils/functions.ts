@@ -1,24 +1,20 @@
 import {
-  PermissionFlagsBits,
   ChannelType,
-  Guild,
+  type Guild,
+  PermissionFlagsBits,
   type TextChannel,
-} from "discord.js";
-import { RaidOptions } from "../types/interfaces";
+} from 'discord.js';
+import type { RaidOptions } from '../types/interfaces';
 
 export const deleteChannels = async (guild: Guild) => {
-  guild.channels.cache.forEach((c: any) => {
+  guild.channels.cache.forEach((c) => {
     c.delete();
   });
 };
 
-const sendMessages = async (
-  channel: TextChannel,
-  raidData: RaidOptions,
-  ms?: number
-) => {
+const sendMessages = async (channel: TextChannel, raidData: RaidOptions) => {
   const message = raidData.ping ? `@everyone ${raidData.link}` : raidData.link;
-  
+
   for (let i = 0; i < 5; i++) {
     await channel.send(message);
   }

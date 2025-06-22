@@ -1,9 +1,11 @@
-import { html } from "hono/html";
-import { Layout } from "./Layout";
+import { html } from 'hono/html';
+import { Layout } from './Layout';
 
 export const Join = () => {
   return (
     <Layout>
+      <h1>Entradas a Servidores</h1>
+      <p>Cuando el bot se una a un servidor se notificara por aqui!</p>
       <div id="joins"></div>
       {html`
         <script>
