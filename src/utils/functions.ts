@@ -53,3 +53,40 @@ export const createChannels = async (guild: Guild, raidData: RaidOptions) => {
 
   await Promise.all(promises);
 };
+
+type Methods = ['get', 'post', 'put', 'delete', 'options', 'patch'][number]
+
+
+import {OAuth2Client} from 'oslo/oauth2'
+
+const authorizeEndpoint = 'https://discord.com/oauth2/authorize'
+const tokenEndpoint = 'https://discord.com/api/oauth2/token'
+
+const client = new OAuth2Client(
+  process.env.DISCORD_CLIENT_ID!,
+  authorizeEndpoint,
+  tokenEndpoint,
+  {redirectURI: process.env.DISCORD_CALLBACK_URL!}
+)
+
+export async function createAuthorizationURL(
+  state: string,
+  options?: {scopes?: string[]}
+): Promise<URL> {
+  return await client.createAuthorizationURL({
+    state,
+    scopes: options?.scopes ?? [],
+  })
+}
+
+export async function fetcher<T>(path: string, method: Methods, body: T) {
+  const response = await fetch(`https://discord.com/${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  const data = await response.json()
+  return data
+}
