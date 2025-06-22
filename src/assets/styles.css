@@ -3,7 +3,9 @@ body {
   font-family: system-ui, sans-serif;
   background-color: #e2e8f0; /* bg-slate-200 */
   color: #171717; /* text-neutral-900 */
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 body.dark {
@@ -16,7 +18,9 @@ a {
   font-weight: 500;
   font-size: 1.125rem; /* text-lg */
   cursor: pointer;
-  transition: color 0.15s ease, text-decoration 0.15s ease;
+  transition:
+    color 0.15s ease,
+    text-decoration 0.15s ease;
 }
 a:hover,
 a:focus {
@@ -160,7 +164,9 @@ main {
   gap: 0.875rem;
   cursor: pointer;
   background: transparent;
-  transition: border-color 0.3s, color 0.3s;
+  transition:
+    border-color 0.3s,
+    color 0.3s;
 }
 body.dark .btn-docs {
   border-color: white;
@@ -220,11 +226,6 @@ body.dark .feature-card {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
-.feature-card p {
-  font-weight: 500;
-  font-size: 1rem;
-  margin: 0;
-}
 footer {
   border-top: 1px solid #94a3b8;
   padding: 2rem 1.5rem;
@@ -232,11 +233,7 @@ footer {
 body.dark footer {
   border-color: #27272a;
 }
-footer p {
-  font-weight: 600;
-  color: #4b5563; /* neutral-700 */
-  margin: 0;
-}
+
 body.dark footer p {
   color: #9ca3af; /* neutral-400 */
 }

@@ -1,7 +1,8 @@
-import { Header } from "./components/Header";
+import type { FC } from 'hono/jsx';
+import { Header } from './components/Header';
 
-export const Layout = (props: { children: any }) => (
-  <html>
+export const Layout: FC = (props) => (
+  <html lang="en">
     <head>
       <title>Ohio</title>
       <link href="/styles.css" rel="stylesheet" />
