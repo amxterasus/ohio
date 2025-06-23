@@ -28,5 +28,9 @@ raidRouter.post("/", async (c) => {
   await createChannels(guild, config);
   await createRoles(guild, config);
 
-  return c.text(`Guild ID: ${guildId}`);
+  return c.json({
+    ok: true,
+    guild: guildId,
+    config,
+  });
 });

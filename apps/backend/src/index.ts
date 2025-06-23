@@ -1,7 +1,6 @@
 import { Hono } from 'hono';
-import { createBunWebSocket, serveStatic } from 'hono/bun';
+import { createBunWebSocket } from 'hono/bun';
 import { client } from './client';
-import { Join } from './pages/Join';
 import { discordRouter } from './routes/discord.js';
 import { guildRouter } from './routes/guilds';
 import { raidRouter } from './routes/raid';
@@ -9,10 +8,6 @@ import { raidRouter } from './routes/raid';
 const { upgradeWebSocket, websocket } = createBunWebSocket();
 
 const app = new Hono();
-
-app.get('/joins', async (c) => {
-  return c.html(<Join />);
-});
 
 app.get(
   '/ws',
@@ -28,8 +23,6 @@ app.get(
     };
   }),
 );
-
-app.use('/*', serveStatic({ root: './src/assets' }));
 
 app.route('/raid', raidRouter);
 

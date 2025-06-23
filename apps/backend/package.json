@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "dev": "bun run src/index.ts --watch"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^5.3.6",
+    "discord.js": "^14.20.0",
+    "hono": "^4.8.2",
+    "oslo": "^1.2.1"
+  }
+}
