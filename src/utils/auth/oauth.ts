@@ -7,7 +7,7 @@ const client = new OAuth2Client(
   process.env.DISCORD_CLIENT_ID ?? '',
   authorizeEndpoint,
   tokenEndpoint,
-  { redirectURI: process.env.DISCORD_CALLBACK_URL! },
+  { redirectURI: process.env.DISCORD_CALLBACK_URL ?? '' },
 );
 
 export async function createAuthorizationURL(
