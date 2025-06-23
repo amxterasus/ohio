@@ -8,7 +8,7 @@ export const Guilds: FC<{ guilds: Guild[] }> = (props: { guilds: Guild[] }) => {
     <Layout>
       <div>
         {props.guilds.map((g) => (
-          <div class="guild-container">
+          <div class="guild-card">
             <img
               src={
                 g.iconURL({ forceStatic: true }) ||
@@ -17,9 +17,9 @@ export const Guilds: FC<{ guilds: Guild[] }> = (props: { guilds: Guild[] }) => {
               alt="guild icon"
               class="guild-icon"
             />
-            <div class="guild-card">
+            <div class="guild-info">
               <h3>{g.name}</h3>
-              <div class="guild-info">
+              <div class="guild-stats">
                 <p>
                   {<UserIcon />}: {g.memberCount}
                 </p>
@@ -32,6 +32,7 @@ export const Guilds: FC<{ guilds: Guild[] }> = (props: { guilds: Guild[] }) => {
               </div>
               <p>{g.description}</p>
             </div>
+            <a href="discord.gg/nigger">Invite</a>
           </div>
         ))}
       </div>

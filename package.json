@@ -14,7 +14,6 @@
     "oslo": "^1.2.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.4",
-    "@types/bun": "latest"
+    "@biomejs/biome": "2.0.4"
   }
 }
