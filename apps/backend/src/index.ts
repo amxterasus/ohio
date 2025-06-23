@@ -2,8 +2,8 @@ import { Hono } from 'hono';
 import { createBunWebSocket } from 'hono/bun';
 import { client } from './client';
 import { discordRouter } from './routes/discord.js';
-import { guildRouter } from './routes/guilds';
-import { raidRouter } from './routes/raid';
+import { guildRouter } from './routes/guilds.js';
+import { raidRouter } from './routes/raid.js';
 
 const { upgradeWebSocket, websocket } = createBunWebSocket();
 
@@ -16,7 +16,7 @@ app.get(
       onOpen(_event, ws) {
         client.on('guildCreate', (guild) => {
           console.log(guild);
-          ws.send(`Me he unido al servidor ${guild.name}`);
+          ws.send(`I have joined ${guild.name} guild.`);
         });
       },
       onClose() {},
