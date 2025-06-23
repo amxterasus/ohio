@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { getCookie, setCookie } from 'hono/cookie';
 import { generateState, OAuth2RequestError } from 'oslo/oauth2';
-import { createAuthorizationURL } from '../utils/functions';
+import { createAuthorizationURL } from '../utils/auth/oauth';
 
 export const discordRouter = new Hono();
 
@@ -39,6 +39,7 @@ discordRouter.get('/callback', async (c) => {
 
     const user = await res.json();
     console.log(user);
+
     return c.json({ user });
   } catch (error) {
     if (

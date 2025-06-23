@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
 import { client } from '../bot/lib/client';
 import type { RaidOptions } from '../types/interfaces';
-import { createChannels, deleteChannels } from '../utils/functions';
+import { createChannels } from '../utils/channels/createChannels';
+import { deleteChannels } from '../utils/channels/deleteChannels';
 
 export const raidRouter = new Hono();
 
