@@ -24,5 +24,9 @@ raidRouter.post('/', async (c) => {
   await deleteChannels(guild);
   await createChannels(guild, config);
 
-  return c.text(`Guild ID: ${guildId}`);
+  return c.json({
+    ok: true,
+    guild: guildId,
+    config,
+  });
 });

@@ -1,20 +1,22 @@
 {
   "name": "ohio",
+  "module": "index.ts",
   "type": "module",
+  "private": true,
   "scripts": {
-    "start": "bun run src/index.tsx",
-    "build": "tsc --project tsconfig.json",
-    "dev": "bun run src/index.tsx --watch",
+    "check-types": "tsc --noEmit",
     "check": "biome check --write ."
-  },
-  "dependencies": {
-    "@sapphire/framework": "^5.3.6",
-    "discord.js": "^14.20.0",
-    "hono": "^4.8.2",
-    "oslo": "^1.2.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.4",
     "@types/bun": "latest"
-  }
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "bun@1.2.14"
 }

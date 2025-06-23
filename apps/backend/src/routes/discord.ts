@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { getCookie, setCookie } from 'hono/cookie';
 import { generateState, OAuth2RequestError } from 'oslo/oauth2';
+import { getAccessToken } from '../utils/auth/fetchUser';
 import { createAuthorizationURL } from '../utils/auth/oauth';
 
 export const discordRouter = new Hono();
@@ -51,27 +52,3 @@ discordRouter.get('/callback', async (c) => {
     return c.body(null, 500);
   }
 });
-
-export async function getAccessToken(code: string) {
-  const body = new URLSearchParams({
-    client_id: process.env.DISCORD_CLIENT_ID ?? '',
-    client_secret: process.env.DISCORD_CLIENT_SECRET ?? '',
-    grant_type: 'authorization_code',
-    code: code?.toString() ?? '',
-    redirect_uri: process.env.DISCORD_CALLBACK_URL ?? '',
-  });
-
-  const res = await fetch('https://discord.com/api/oauth2/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body,
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to exchange code for token');
-  }
-
-  return res.json();
-}
