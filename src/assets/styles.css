@@ -1,15 +1,15 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background-color: #e2e8f0; /* bg-slate-200 */
-  color: #171717; /* text-neutral-900 */
+  background-color: #0a0a0a; /* bg-slate-200 */
+  color: #0a0a0a; /* text-neutral-900 */
   transition:
     background-color 0.3s,
     color 0.3s;
 }
 
 body.dark {
-  background-color: #18181b; /* dark:bg-neutral-900 */
+  background-color: #0a0a0a; /* dark:bg-neutral-900 */
   color: white; /* dark:text-white */
 }
 a {
@@ -243,4 +243,28 @@ img {
 }
 .hidden {
   display: none;
+}
+
+.guild-container {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  width: 850px;
+  height: 150px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.guild-icon {
+  border-radius: 53px;
+  width: 106px;
+}
+
+.guild-card {
+}
+
+.guild-info {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
