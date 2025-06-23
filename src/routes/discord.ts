@@ -30,19 +30,14 @@ discordRouter.get('/callback', async (c) => {
   }
   try {
     const token = await getAccessToken(code);
-
     const res = await fetch('https://discord.com/api/users/@me', {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
     });
-
-    if (!res.ok) {
-      return c.body('Failed to fetch user info', 500);
-    }
+    if (!res.ok) return c.body('Failed to fetch user info', 500);
 
     const user = await res.json();
-
     console.log(user);
 
     return c.json({ user });
@@ -57,7 +52,7 @@ discordRouter.get('/callback', async (c) => {
   }
 });
 
-export async function getAccessToken(code: any) {
+export async function getAccessToken(code: string) {
   const body = new URLSearchParams({
     client_id: process.env.DISCORD_CLIENT_ID ?? '',
     client_secret: process.env.DISCORD_CLIENT_SECRET ?? '',
