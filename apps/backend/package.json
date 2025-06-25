@@ -4,7 +4,8 @@
   "scripts": {
     "start": "bun run src/index.ts",
     "build": "tsc --project tsconfig.json",
-    "dev": "bun run src/index.ts --watch"
+    "dev": "bun run src/index.ts --watch",
+    "check": "biome check --write ."
   },
   "dependencies": {
     "@sapphire/framework": "^5.3.6",

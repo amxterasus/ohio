@@ -1,15 +1,12 @@
 ---
-import { cn } from "src/lib/utils";
-import "../styles/global.css";
+import { cn } from 'src/lib/utils';
+import { ModeToggle } from '@/components/ModeToggle';
 
 const isActive = Astro.url.pathname;
-
 ---
 
 <header class="flex flex-col top-0 z-30 sticky bg-background backdrop-blur-md">
-  <nav
-    class="md:grid grid-cols-12 md:border-b top-0 flex items-center justify-between"
-  >
+  <nav class="md:grid grid-cols-12 md:border-b top-0 flex items-center justify-between">
     <a
       href=""
       title="Ohio"
@@ -25,9 +22,23 @@ const isActive = Astro.url.pathname;
           >
           <div
             class={cn(
-              "absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500",
-              "group-hover:opacity-100 group-hover:w-full",
-              isActive === "/" ? "opacity-100 w-full" : "w-0"
+              'absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500',
+              'group-hover:opacity-100 group-hover:w-full',
+              isActive === '/' ? 'opacity-100 w-full' : 'w-0'
+            )}
+          >
+          </div>
+        </li>
+        <li class="relative group">
+          <a
+            class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground"
+            href="/raids">raids</a
+          >
+          <div
+            class={cn(
+              'absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500',
+              'group-hover:opacity-100 group-hover:w-full',
+              isActive === '/raids' ? 'opacity-100 w-full' : 'w-0'
             )}
           >
           </div>
@@ -39,14 +50,19 @@ const isActive = Astro.url.pathname;
           >
           <div
             class={cn(
-              "absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500",
-              "group-hover:opacity-100 group-hover:w-full",
-              isActive === "/joins" ? "opacity-100 w-full" : "w-0"
+              'absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500',
+              'group-hover:opacity-100 group-hover:w-full',
+              isActive === '/joins' ? 'opacity-100 w-full' : 'w-0'
             )}
           >
           </div>
         </li>
         <li class="relative group bg-muted/20">
+          <div
+            class="w-full h-full block py-2.5 px-5 transition-colors group-hover:text-foreground text-muted-foreground"
+          >
+            <ModeToggle client:load />
+          </div>
         </li>
       </ul>
     </div>
