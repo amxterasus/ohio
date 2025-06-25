@@ -1,28 +1,56 @@
 ---
-import '../styles/global.css'
-import { Button } from './ui/button'
+import { cn } from "src/lib/utils";
+import "../styles/global.css";
+
+const isActive = Astro.url.pathname;
+
+import { ModeToggle } from "./ui/ModeToggle";
 ---
 
-<header class="flex flex-col top-0 z-30 sticky bg-foreground backdrop-blur-md">
-  <nav class="md:grid grid-cols-12 md:border-b top-0 flex items-center justify-between">
-    <a href="" title="Ohio" class="md:border-r md:px-5 px-2.5 py-4 text-[#53FC18] md:col-span-2 shrink-0 transition-colors md:w-[268px] lg:w-[286px] ">ohio</a>
+<header class="flex flex-col top-0 z-30 sticky bg-background backdrop-blur-md">
+  <nav
+    class="md:grid grid-cols-12 md:border-b top-0 flex items-center justify-between"
+  >
+    <a
+      href=""
+      title="Ohio"
+      class="md:border-r md:px-5 px-2.5 py-4 md:col-span-2 shrink-0 transition-colors md:w-[268px] lg:w-[286px] text-[#53fc18]"
+      >ohio</a
+    >
     <div class="md:col-span-10 flex items-center justify-end relative">
       <ul class="md:flex items-center divide-x w-max hidden shrink-0">
         <li class="relative group">
-          <a class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground" href="/">index_</a>
-          <div class="absolute bottom-0 h-0.5 bg-muted-foreground transition-all duration-500 group-hover:opacity-100 group-hover:w-full opacity-100 w-full"></div>
+          <a
+            class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground"
+            href="/">_index</a
+          >
+          <div
+            class={cn(
+              "absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500",
+              "group-hover:opacity-100 group-hover:w-full",
+              isActive === "/" ? "opacity-100 w-full" : "w-0"
+            )}
+          >
+          </div>
         </li>
         <li class="relative group">
-          <a class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground" href="/guilds">index_</a>
-          <div class="absolute bottom-0 h-0.5 bg-muted-foreground transition-all duration-500 group-hover:opacity-100 group-hover:w-full opacity-100 w-full"></div>
+          <a
+            class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground"
+            href="/joins">joins</a
+          >
+          <div
+            class={cn(
+              "absolute bottom-0 h-0.5 bg-muted-foreground opacity-0 transition-all duration-500",
+              "group-hover:opacity-100 group-hover:w-full",
+              isActive === "/joins" ? "opacity-100 w-full" : "w-0"
+            )}
+          >
+          </div>
         </li>
-        <li class="relative group">
-          <a class="w-full h-full block py-4 px-5 transition-colors group-hover:text-foreground text-muted-foreground" href="/joins">index_</a>
-          <div class="absolute bottom-0 h-0.5 bg-muted-foreground transition-all duration-500 group-hover:opacity-100 group-hover:w-full opacity-100 w-full"></div>
+        <li class="relative group bg-muted/20">
+          <ModeToggle client:load />
         </li>
       </ul>
-      <Button variant="secondary">Home</Button>
     </div>
   </nav>
 </header>
-

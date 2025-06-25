@@ -1,6 +1,6 @@
 ---
 import Header from '../components/Header.astro';
-import '../styles/global.css'
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -12,13 +12,16 @@ import '../styles/global.css'
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
-	<body class="bg-foreground text-background">
+	<body class="bg-background text-foreground mx-16">
 		<Header />
 		<slot />
 	</body>
 </html>
 
 <style>
+	:root {
+		color-scheme: dark;
+	}
 	html,
 	body {
 		margin: 0;
