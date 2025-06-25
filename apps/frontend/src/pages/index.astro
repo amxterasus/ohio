@@ -1,11 +1,46 @@
 ---
-import GuildCard from '../components/GuildCard.astro';
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import GuildCard from "../components/GuildCard.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+
+const res = await fetch("http://localhost:3000/guilds");
+const guilds = await res.json();
 ---
 
 <Layout>
-  <main>
-    
+  <main class="mx-14 mt-10">
+    <div
+      class="max-h-[40rem] relative w-full flex md:items-center md:justify-center dark:bg-black/[0.96] antialiased bg-grid-white/[0.02] overflow-hidden px-8 md:min-h-[40rem]"
+    >
+      <div
+        class="md:px-10 dark:-mb-32 dark:mt-[-4.75rem] dark:pb-32 dark:pt-[4.75rem]"
+      >
+        <div class="flex gap-x-4 items-center">
+          <span class="bg-foreground text-background px-0.5 text-sm">00.</span>
+          <h1 class="text-lg">Index</h1>
+        </div>
+        <p>Paments for developers is a mesttttttttttttts, again</p>
+      </div>
+    </div>
+    <div
+      class="relative h-auto w-full flex-col md:w-auto md:self-start flex aspect-video flex-grow self-start md:max-w-lg"
+    >
+      <div class="border-zinc-200 bg-zinc-900 relative w-full border-2">
+        <div
+          class="bg-zinc-200 flex flex-row justify-between px-2 py-1 text-xs text-black"
+        >
+          <span class="font-bold">Terminal</span><span
+            class="mb-1 h-0.5 w-2 self-end bg-black"></span>
+        </div><div class="flex flex-col overflow-auto p-4 font-mono text-sm">
+          <pre
+            class="flex flex-col gap-y-2 pb-4"><code>$ cat server_list.md</code><code class="text-zinc-500">{guilds.map((guild: any, index) => `${String(index).padStart(2, '0')}. ${guild.name}\n`)
+}</code></pre>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
+
+<script>
+  
+</script>

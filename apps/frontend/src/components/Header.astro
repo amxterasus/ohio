@@ -4,7 +4,6 @@ import "../styles/global.css";
 
 const isActive = Astro.url.pathname;
 
-import { ModeToggle } from "./ui/ModeToggle";
 ---
 
 <header class="flex flex-col top-0 z-30 sticky bg-background backdrop-blur-md">
@@ -14,7 +13,7 @@ import { ModeToggle } from "./ui/ModeToggle";
     <a
       href=""
       title="Ohio"
-      class="md:border-r md:px-5 px-2.5 py-4 md:col-span-2 shrink-0 transition-colors md:w-[268px] lg:w-[286px] text-[#53fc18]"
+      class="md:border-r md:px-5 px-2.5 py-4 md:col-span-2 shrink-0 transition-colors md:w-[268px] lg:w-[286px] text-ohio"
       >ohio</a
     >
     <div class="md:col-span-10 flex items-center justify-end relative">
@@ -48,7 +47,6 @@ import { ModeToggle } from "./ui/ModeToggle";
           </div>
         </li>
         <li class="relative group bg-muted/20">
-          <ModeToggle client:load />
         </li>
       </ul>
     </div>
