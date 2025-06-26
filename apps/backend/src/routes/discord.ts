@@ -7,7 +7,6 @@ import { createAuthorizationURL } from '../utils/auth/oauth';
 export const discordRouter = new Hono();
 
 discordRouter.get('/', async (c) => {
-  console.log(process.env.DISCORD_CALLBACK_URL);
   const state = generateState();
   const url = await createAuthorizationURL(state, {
     scopes: ['identify', 'guilds.join'],
@@ -23,6 +22,7 @@ discordRouter.get('/', async (c) => {
 });
 
 discordRouter.get('/callback', async (c) => {
+  
   const code = c.req.query('code')?.toString() ?? null;
   const state = c.req.query('state')?.toString() ?? null;
   const storedState = getCookie(c).discord_oauth_state ?? null;
@@ -31,17 +31,21 @@ discordRouter.get('/callback', async (c) => {
   }
   try {
     const token = await getAccessToken(code);
-    const res = await fetch('https://discord.com/api/users/@me', {
-      headers: {
-        Authorization: `Bearer ${token.access_token}`,
-      },
+
+    setCookie(c, 'session_token', token.access_token, {
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7, // 1 semana
+      sameSite: 'Lax',
     });
-    if (!res.ok) return c.body('Failed to fetch user info', 500);
 
-    const user = await res.json();
-    console.log(user);
+    setCookie(c, 'discord_oauth_state', '', {
+      path: '/',
+      expires: new Date(0),
+    });
 
-    return c.json({ user });
+    return c.redirect('/');
   } catch (error) {
     if (
       error instanceof OAuth2RequestError &&

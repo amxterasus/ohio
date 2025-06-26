@@ -24,7 +24,9 @@ const guilds = (await response.json()) as Guild[];
           </div>
           <p>Ohio the best discord bot raider</p>
           <div class="mt-4 flex w-fit flex-col gap-4 md-flex-row md:justify-center lg:justify-start items-center">
-            <Button className="rounded-none cursor-crosshair">Log In</Button>
+            <a href="http://localhost:3000/login/discord" target="_blank">
+              <Button className="rounded-none cursor-crosshair">Log In</Button>
+            </a>
           </div>
         </div>
         <TerminalCard
