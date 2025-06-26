@@ -35,3 +35,22 @@ export async function getAccessToken(code: string) {
 
   return res.json();
 }
+
+export async function getUser(accessToken: string): Promise<{
+  id: string;
+  global_name: string;
+  username: string;
+  avatar: string | null;
+}> {
+  const response = await fetch('https://discord.com/api/users/@me', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Discord user fetch failed: ${response.statusText}`);
+  }
+
+  return response.json();
+}

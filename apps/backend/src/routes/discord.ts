@@ -1,10 +1,13 @@
 import { Hono } from 'hono';
-import { getCookie, setCookie } from 'hono/cookie';
+import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
+import { sign, verify } from 'hono/jwt';
 import { generateState, OAuth2RequestError } from 'oslo/oauth2';
-import { getAccessToken } from '../utils/auth/fetchUser';
+import { getAccessToken, getUser } from '../utils/auth/fetchUser';
 import { createAuthorizationURL } from '../utils/auth/oauth';
 
 export const discordRouter = new Hono();
+
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:4321';
 
 discordRouter.get('/', async (c) => {
   const state = generateState();
@@ -22,7 +25,6 @@ discordRouter.get('/', async (c) => {
 });
 
 discordRouter.get('/callback', async (c) => {
-  
   const code = c.req.query('code')?.toString() ?? null;
   const state = c.req.query('state')?.toString() ?? null;
   const storedState = getCookie(c).discord_oauth_state ?? null;
@@ -30,22 +32,28 @@ discordRouter.get('/callback', async (c) => {
     return c.body(null, 400);
   }
   try {
-    const token = await getAccessToken(code);
+    const { access_token } = await getAccessToken(code);
+    const { id, global_name, username, avatar } = await getUser(access_token);
+    const payload = {
+      id,
+      global_name,
+      username,
+      avatar,
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7,
+    };
+    const token = await sign(payload, process.env.JWT_SECRET ?? '');
 
-    setCookie(c, 'session_token', token.access_token, {
+    setCookie(c, 'session_token', token, {
       path: '/',
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7, // 1 semana
+      maxAge: 60 * 60 * 24 * 7,
       sameSite: 'Lax',
     });
+    deleteCookie(c, 'discord_oauth_state');
 
-    setCookie(c, 'discord_oauth_state', '', {
-      path: '/',
-      expires: new Date(0),
-    });
-
-    return c.redirect('/');
+    return c.redirect(`${frontendUrl}/profile`);
   } catch (error) {
     if (
       error instanceof OAuth2RequestError &&
@@ -54,5 +62,41 @@ discordRouter.get('/callback', async (c) => {
       return c.body(null, 400);
     }
     return c.body(null, 500);
+  }
+});
+
+discordRouter.get('/profile', async (c) => {
+  const session = getCookie(c).session_token ?? null;
+  if (!session) {
+    return c.json({ success: false }, 401);
+  }
+  const payload = await verify(session, process.env.JWT_SECRET ?? '');
+  return c.json({
+    success: true,
+    user: {
+      id: payload.id,
+      global_name: payload.global_name,
+      username: payload.username,
+      avatar: payload.avatar,
+    },
+  });
+});
+
+discordRouter.post('/logout', async (c) => {
+  try {
+    deleteCookie(c, 'session_token');
+    return c.json({
+      success: true,
+      message: 'Logged out successfully',
+    });
+  } catch (error) {
+    console.error(error);
+    return c.json(
+      {
+        success: false,
+        error: 'Logout failed',
+      },
+      500,
+    );
   }
 });
