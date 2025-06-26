@@ -3,32 +3,32 @@
   "vcs": {
     "enabled": false,
     "clientKind": "git",
-    "useIgnoreFile": false
+    "useIgnoreFile": false,
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
-    }
+      "recommended": true,
+    },
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single"
-    }
+      "quoteStyle": "single",
+    },
   },
   "assist": {
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
-      }
-    }
-  }
+        "organizeImports": "on",
+      },
+    },
+  },
 }

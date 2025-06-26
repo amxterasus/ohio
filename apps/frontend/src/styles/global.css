@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @theme inline {
   --default-font-family: 'JetBrains Mono';
   --radius-sm: calc(var(--radius) - 4px);

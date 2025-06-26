@@ -1,0 +1,11 @@
+---
+const { id, name, user } = Astro.props;
+---
+
+<div
+  class="justify-center items-center border-l-[1.2px] md:min-h-[130px] border-t-[1.2px] md:border-t-0 transform-gpu flex flex-col p-10"
+>
+  <img class="w-24 h-24" src=`https://japi.rest/discord/v1/user/${id}/avatar` />
+  <h1 class="text-lg">{name}</h1>
+  <p class="text-xs">@{user}</p>
+</div>
