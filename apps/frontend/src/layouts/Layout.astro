@@ -21,6 +21,8 @@ const { title } = Astro.props;
   <body class="overflow-y-auto scrollbar-hidden">
     <Header />
     <slot />
+    <div class="hidden absolute top-0 left-5 w-px h-[calc(100%_+_30px)] bg-border pointer-events-none lg:block lg:left-16 xl:left-16"></div>
+    <div class="hidden absolute top-0 right-5 w-px h-[calc(100%_+_30px)] bg-border pointer-events-none lg:block lg:right-14 xl:right-14"></div>
   </body>
 </html>
 
