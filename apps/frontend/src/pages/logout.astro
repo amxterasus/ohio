@@ -1,0 +1,8 @@
+<script>
+  import { API_BASE } from '@/consts';
+  await fetch(`${API_BASE}/login/discord/logout`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+  window.location.href = '/';
+</script>

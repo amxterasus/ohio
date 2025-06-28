@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
-import { sign, verify } from 'hono/jwt';
+import { sign } from 'hono/jwt';
 import { generateState, OAuth2RequestError } from 'oslo/oauth2';
+import { authMiddleware } from '../middleware/auth.middleware';
 import { getAccessToken, getUser } from '../utils/auth/fetchUser';
 import { createAuthorizationURL } from '../utils/auth/oauth';
 
@@ -65,24 +66,15 @@ discordRouter.get('/callback', async (c) => {
   }
 });
 
-discordRouter.get('/profile', async (c) => {
-  const session = getCookie(c).session_token ?? null;
-  if (!session) {
-    return c.json({ success: false }, 401);
-  }
-  const payload = await verify(session, process.env.JWT_SECRET ?? '');
+discordRouter.get('/profile', authMiddleware, async (c) => {
+  const user = c.get('user');
   return c.json({
     success: true,
-    user: {
-      id: payload.id,
-      global_name: payload.global_name,
-      username: payload.username,
-      avatar: payload.avatar,
-    },
+    user,
   });
 });
 
-discordRouter.post('/logout', async (c) => {
+discordRouter.post('/logout', authMiddleware, async (c) => {
   try {
     deleteCookie(c, 'session_token');
     return c.json({

@@ -1,12 +1,8 @@
 ---
-import type { Guild } from 'discord.js';
 import { Button } from '@/components/ui/button';
 import Layout from '../layouts/Layout.astro';
-import TerminalCard from '@/components/cards/TerminalCard.astro';
 import DevCard from '@/components/cards/DevCard.astro';
-
-const response = await fetch('http://localhost:3000/guilds');
-const guilds = (await response.json()) as Guild[];
+import GuildList from '@/components/cards/GuildList';
 ---
 
 <Layout>
@@ -29,10 +25,7 @@ const guilds = (await response.json()) as Guild[];
             </a>
           </div>
         </div>
-        <TerminalCard
-          command="cat server_list.md"
-          output={guilds.map((guild: Guild, index: number) => `${String(index).padStart(2, '0')}. ${guild.name}\n`)}
-        />
+        <GuildList />
       </div>
     </div>
   </main>
