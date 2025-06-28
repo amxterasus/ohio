@@ -3,15 +3,17 @@ import Layout from '@/layouts/Layout.astro';
 ---
 
 <Layout title="profile">
-  <div class="" id="user-data"></div>
+  <div class="text-lg" id="user-data"></div>
 </Layout>
 
 <script>
+  import { API_BASE } from '@/consts';
+
   const userData = document.getElementById('user-data')!;
-  const response = await fetch('http://localhost:3000/login/discord/profile', {
+  const response = await fetch(`${API_BASE}/login/discord/profile`, {
     credentials: 'include',
   });
+  if (!response.ok) window.location.href = '/';
   const data = await response.json();
-  console.log(data);
   userData.textContent = JSON.stringify(data.user);
 </script>

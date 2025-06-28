@@ -1,0 +1,6 @@
+---
+import { API_BASE } from '@/consts';
+
+Astro.session?.destroy();
+return Astro.redirect(`${API_BASE}/login/discord`);
+---
