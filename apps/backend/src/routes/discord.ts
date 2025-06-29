@@ -13,7 +13,7 @@ const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:4321';
 discordRouter.get('/', async (c) => {
   const state = generateState();
   const url = await createAuthorizationURL(state, {
-    scopes: ['identify', 'guilds.join'],
+    scopes: ['identify', 'guilds'],
   });
   setCookie(c, 'discord_oauth_state', state, {
     path: '/',
@@ -34,7 +34,7 @@ discordRouter.get('/callback', async (c) => {
   }
   try {
     const { access_token } = await getAccessToken(code);
-    const { id, global_name, username, avatar } = await getUser(access_token);
+    const { id, global_name, username, avatar, guilds } = await getUser(access_token);
     const payload = {
       id,
       global_name,

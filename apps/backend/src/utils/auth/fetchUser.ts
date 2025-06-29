@@ -41,8 +41,30 @@ export async function getUser(accessToken: string): Promise<{
   global_name: string;
   username: string;
   avatar: string | null;
+  guilds: string[];
 }> {
   const response = await fetch('https://discord.com/api/users/@me', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Discord user fetch failed: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function getUserGuilds(accessToken: string): Promise<{
+  id: string;
+  name: string;
+  icon: string | null;
+  owner: boolean;
+  permissions: string;
+  features: string[];
+}> {
+  const response = await fetch('https://discord.com/api/users/@me/guilds', {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
