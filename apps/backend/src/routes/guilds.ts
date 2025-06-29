@@ -8,3 +8,12 @@ guildRouter.get('/', async (c) => {
 
   return c.json(guilds);
 });
+
+guildRouter.get('/:id', async (c) => {
+  const guildId = c.req.param('id');
+  const guild = client.guilds.cache.get(guildId);
+
+  const owner = await guild?.fetchOwner({ force: true });
+
+  return c.json({ guild, owner });
+});

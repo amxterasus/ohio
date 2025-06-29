@@ -19,9 +19,17 @@ import GuildList from '@/components/cards/GuildList';
             <h1 class="text-lg">Ohio</h1>
           </div>
           <p>Ohio the best discord bot raider</p>
-          <div class="mt-4 flex w-fit flex-col gap-4 md-flex-row md:justify-center lg:justify-start items-center">
-            <a href="http://localhost:3000/login/discord" target="_blank">
-              <Button className="rounded-none cursor-crosshair">Log In</Button>
+          <div
+            class="mt-4 flex w-fit flex-col gap-4 font-sans md:flex-row md:justify-center lg:justify-start items-center"
+          >
+            <a href="/login">
+              <Button className="rounded-none cursor-pointer">Log In</Button>
+            </a>
+            <a
+              href="https://discord.com/oauth2/authorize?client_id=1386123405098483743&permissions=8&integration_type=0&scope=bot"
+              target="_blank"
+            >
+              <Button variant="outline" className="rounded-none cursor-pointer">Add Bot</Button>
             </a>
           </div>
         </div>
