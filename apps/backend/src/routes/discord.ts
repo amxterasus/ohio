@@ -34,7 +34,7 @@ discordRouter.get('/callback', async (c) => {
   }
   try {
     const { access_token } = await getAccessToken(code);
-    const { id, global_name, username, avatar, guilds } = await getUser(access_token);
+    const { id, global_name, username, avatar } = await getUser(access_token);
     const payload = {
       id,
       global_name,

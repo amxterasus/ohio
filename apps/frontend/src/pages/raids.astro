@@ -2,7 +2,7 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Layout from '@/layouts/Layout.astro';
-import {GuildForm} from '@/components/cards/GuildForm'
+import { GuildForm } from '@/components/cards/GuildForm';
 ---
 
 <Layout title="raids">
@@ -10,18 +10,13 @@ import {GuildForm} from '@/components/cards/GuildForm'
     class="max-h-[40rem] relative w-full flex md:items-center md:justify-center overflow-hidden px-8 md:min-h-[40rem] md:border-b border-dashed bg-gradient-to-tl from-background to-accent/30"
   >
     <div class="overflow-hidden md:px-10 -mb-32 mt-[-4.75rem] pb-32 pt-[4.75rem]">
-      <div
-        class="lg:max-w-7xl mx-auto grid max-w-full grid-cols-1 items-center gap-x-6 gap-y-14 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-12"
-      >
-        <div class="md:text-center lg:text-left">
-          <div class="flex flex-row mb-4">
-            <span class="bg-foreground text-background px-0.5 text-sm">02.</span>
-            <h1 class="text-lg">Raid</h1>
-          </div>
-          <div class="flex flex-row gap-4">
-            <GuildForm />
-          </div>
-          <div></div>
+      <div class="md:text-center lg:text-left">
+        <div class="flex flex-row mb-4">
+          <span class="bg-foreground text-background px-0.5 text-sm">02.</span>
+          <h1 class="text-lg">Raid</h1>
+        </div>
+        <div class="flex flex-row gap-4">
+          <GuildForm client:load />
         </div>
       </div>
     </div>

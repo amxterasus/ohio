@@ -18,9 +18,9 @@ raidRouter.post('/', async (c) => {
   const body = await c.req.json();
 
   const config: RaidOptions = {
-    name: "nigger",
-    link: "discord.gg/nigger",
-    ping: true,
+    name: body.name,
+    link: body.link,
+    ping: body.ping,
   };
 
   await deleteRoles(guild);

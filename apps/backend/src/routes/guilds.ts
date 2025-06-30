@@ -15,5 +15,10 @@ guildRouter.get('/:id', async (c) => {
 
   const owner = await guild?.fetchOwner({ force: true });
 
+  if (!guild || !owner)
+    return c.json(
+      { status: false, message: 'not found server or owner!' },
+      500,
+    );
   return c.json({ guild, owner });
 });

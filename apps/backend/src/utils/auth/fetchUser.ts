@@ -41,7 +41,6 @@ export async function getUser(accessToken: string): Promise<{
   global_name: string;
   username: string;
   avatar: string | null;
-  guilds: string[];
 }> {
   const response = await fetch('https://discord.com/api/users/@me', {
     headers: {
