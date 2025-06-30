@@ -2,13 +2,13 @@
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import type { Guild } from 'discord.js';
 import { useState } from 'react';
 import { type GuildInfoProps, GuildInfo } from './GuildInfo';
+import { API_BASE } from '@/consts';
 
 async function getGuild(guildId: string): Promise<GuildInfoProps> {
   if (!guildId) throw Error('No guild ID');
-  const response = await fetch(`http://localhost:3000/guilds/${guildId}`);
+  const response = await fetch(`${API_BASE}/guilds/${guildId}`);
   if (!response.ok) throw Error('Not found server!');
   return response.json();
 }
