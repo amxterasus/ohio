@@ -1,24 +1,40 @@
+'use client';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import type { Guild } from 'discord.js';
-import { use, useState } from 'react';
+import { useState } from 'react';
+import { GuildInfo } from './GuildInfo';
 
 async function getGuild(guildId: string): Promise<Guild> {
-  if (!guildId) throw new Error('No guild ID');
+  if (!guildId) throw Error('No guild ID');
   const response = await fetch(`http://localhost:3000/guilds/${guildId}`);
+  if (!response.ok) throw Error('Not found server!');
   return response.json();
 }
 
 export const GuildForm = () => {
-  const [guild, setGuildId] = useState('');
-  const guilds = use(getGuild(guild));
+  const [lookupId, setLookupId] = useState('');
+  const [guild, setGuild] = useState<Guild | null>(null);
 
-  console.log(guilds)
+  const onClick = async () => {
+    if (!lookupId) return;
+    try {
+      const guildData = await getGuild(lookupId);
+      setGuild(guildData);
+    } catch (err) {
+      console.error('Failed to fetch guild:', err);
+      setGuild(null);
+    }
+  };
 
   return (
-    <div className="flex flex-row gap-4">
-      <Input type="text" placeholder="id" onChange={(e) => setGuildId(e.target.value)} />
-      <Button>Lookup</Button>
+    <div>
+      <div className="flex flex-row gap-4">
+        <Input type="text" placeholder="server id" onChange={(e) => setLookupId(e.target.value)} />
+        <Button onClick={onClick}>Lookup</Button>
+      </div>
+      <div className="mt-7">{guild && <GuildInfo {...guild} />}</div>
     </div>
   );
 };
