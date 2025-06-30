@@ -1,8 +1,8 @@
 ---
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Layout from '../layouts/Layout.astro';
-import GuildInfo from '../components/cards/GuildInfo'
+import Layout from '@/layouts/Layout.astro';
+import {GuildForm} from '@/components/cards/GuildForm'
 ---
 
 <Layout title="raids">
@@ -19,12 +19,9 @@ import GuildInfo from '../components/cards/GuildInfo'
             <h1 class="text-lg">Raid</h1>
           </div>
           <div class="flex flex-row gap-4">
-            <Input type="text" placeholder="id" />
-            <Button >Lookup</Button>
+            <GuildForm />
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
