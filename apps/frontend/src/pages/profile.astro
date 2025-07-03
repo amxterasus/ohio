@@ -1,19 +1,22 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import { ProfileCard } from '@/components/cards/ProfileCard'
 ---
 
 <Layout title="profile">
-  <div class="text-lg" id="user-data"></div>
+  <main
+    class="max-h-[40rem] relative w-full flex md:items-center md:justify-center overflow-hidden px-8 md:min-h-[40rem] bg-gradient-to-tl from-background to-accent/30"
+  >
+    <div class="overflow-hidden md:px-10 -mb-32 mt-[-4.75rem] pb-32 pt-[4.75rem]">
+      <div class="md:text-center lg:text-left">
+        <div class="flex gap-x-4 mb-4 items-center">
+          <span class="bg-foreground text-background px-0.5 text-sm">05.</span>
+          <h1 class="text-lg">Profile</h1>
+        </div>
+        <div class="flex flex-row gap-4">
+          <ProfileCard client:load />
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>
-
-<script>
-  import { API_BASE } from '@/consts';
-
-  const userData = document.getElementById('user-data')!;
-  const response = await fetch(`${API_BASE}/login/discord/profile`, {
-    credentials: 'include',
-  });
-  if (!response.ok) window.location.href = '/';
-  const data = await response.json();
-  userData.textContent = JSON.stringify(data.user);
-</script>
