@@ -7,7 +7,6 @@ import { type GuildInfoProps, GuildInfo } from './GuildInfo';
 import { API_BASE } from '@/consts';
 
 async function getGuild(guildId: string): Promise<GuildInfoProps> {
-  if (!guildId) throw Error('No guild ID');
   const response = await fetch(`${API_BASE}/guilds/${guildId}`);
   if (!response.ok) throw Error('not found server!');
   return response.json();

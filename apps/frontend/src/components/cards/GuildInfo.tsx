@@ -50,6 +50,11 @@ export const GuildInfo = ({ guild, owner, invite }: GuildInfoProps) => {
           <a href={invite} target="_blank" className="w-full">
             <Button className="flex-1 cursor-pointer">Join the server</Button>
           </a>
+          <a href={`/raid/${guild.id}`} className="w-full">
+            <Button variant="outline" className="flex-1 cursor-pointer">
+              Start Raid
+            </Button>
+          </a>
         </div>
       </CardContent>
     </Card>

@@ -1,0 +1,58 @@
+---
+
+---
+
+<div class="max-w-4xl mx-auto mt-8 overflow-hidden shadow-lg border border-foreground bg-[#232323]">
+  <div class="flex items-center h-8 px-4 bg-[#18181b] border-b border-foreground">
+    <span class="w-3 h-3 rounded-full bg-[#ff5f56] mr-2"></span><span class="w-3 h-3 rounded-full bg-[#ffbd2e] mr-2"
+    ></span><span class="w-3 h-3 rounded-full bg-[#27c93f]"></span><span class="ml-4 text-xs text-gradie font-mono"
+      >ohio</span
+    >
+  </div><div class="p-4 h-96 overflow-y-auto font-mono text-[15px] text-[#d0d0d0] bg-[#232323]">
+    <div class="mb-2"><span id="output-lines"></span></div><span>╭╴😺 ~ 🐈 ~</span><form id="terminal-form" class="flex items-center mt-2">
+      <span class="text-[--primary]">╰─→</span><div
+        class="flex-1 ml-2 bg-transparent outline-none border-none font-mono relative cursor-text min-h-[1.5em] text-[#A89984]"
+        tabindex="0"
+      >
+        <span></span><span class="blinking-block-cursor2">█</span><input
+  id="terminal-input"
+  class="flex-1 ml-2 bg-transparent outline-none border-none font-mono text-[#A89984] caret-[#A89984] text-[15px]"
+  type="text"
+  autofocus
+  autocomplete="off"
+  spellcheck="false"
+  placeholder=""
+/>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import 
+
+  const form = document.getElementById('terminal-form');
+  const input = document.getElementById('terminal-input');
+  const output = document.getElementById('output-lines');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const command = input.value.trim();
+    if (!command) return;
+
+    const userLine = document.createElement('div');
+    userLine.innerHTML = `<span class="text-[#89b4fa]">╰─></span> <span>${command}</span>`;
+    output.appendChild(userLine);
+
+    const res = await echoCommand({ command });
+
+    const response = document.createElement('div');
+    response.className = 'text-[#a6e3a1]';
+    response.textContent = res;
+    output.appendChild(response);
+
+    input.value = '';
+    output.scrollTop = output.scrollHeight;
+  });
+</script>

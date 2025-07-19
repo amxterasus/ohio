@@ -120,6 +120,28 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.blinking-block-cursor2 {
+  display: inline-block;
+  width: 1ch;
+  color: var(--primary, #ffb86c);
+  animation: blink 1s steps(1) infinite;
+  font-weight: 700;
+  vertical-align: baseline;
+  margin-left: 0;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  to {
+    opacity: 0;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
