@@ -33,10 +33,11 @@
   const form = document.getElementById('terminal-form') as HTMLFormElement;
   const input = document.getElementById('terminal-input') as HTMLInputElement;
   const output = document.getElementById('output-lines') as HTMLSpanElement;
+  const value = document.getElementById('input-value') as HTMLElement;
 
   input.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
-    const value = document.getElementById('input-value') as HTMLElement;
+
     value.textContent = target.value;
   });
 
@@ -57,6 +58,7 @@
     output.appendChild(response);
 
     input.value = '';
+    value.textContent = '';
     output.scrollTop = output.scrollHeight;
   });
 </script>
