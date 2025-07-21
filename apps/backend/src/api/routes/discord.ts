@@ -2,9 +2,9 @@ import { Hono } from 'hono';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import { sign } from 'hono/jwt';
 import { generateState, OAuth2RequestError } from 'oslo/oauth2';
-import { authMiddleware } from '../middleware/auth.middleware';
-import { getAccessToken, getUser } from '../utils/auth/fetchUser';
-import { createAuthorizationURL } from '../utils/auth/oauth';
+import { authMiddleware } from '../../middleware/auth.middleware';
+import { getAccessToken, getUser } from '../../utils/auth/fetchUser';
+import { createAuthorizationURL } from '../../utils/auth/oauth';
 
 export const discordRouter = new Hono();
 

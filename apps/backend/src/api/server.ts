@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { createBunWebSocket } from "hono/bun";
-import { client } from "./client";
-import { corsMiddleware } from "./middleware/cors";
+import { client } from "../client";
+import { corsMiddleware } from "../middleware/cors";
 import { routes } from "./routes";
 
 const app = new Hono();
@@ -15,7 +15,7 @@ app.get(
   upgradeWebSocket(() => {
     return {
       onOpen(_event, ws) {
-        client.on('guildCreate', (guild) => {
+        client.on('guildCreate', (guild: any) => {
           console.log(guild);
           ws.send(`I have joined ${guild.name} guild.`);
         });
@@ -31,3 +31,5 @@ export default {
   fetch: app.fetch,
   websocket,
 };
+
+export const handler = app.fetch
