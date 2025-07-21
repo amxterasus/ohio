@@ -68,6 +68,6 @@ export const echoCommand = defineAction({
       return `Raid ejecutado en guild ${guildId}:\n${JSON.stringify(data, null, 2)}`;
     }
 
-    return `❓ Comando desconocido: "${cmd}"\nEscribe 'help' para ver los comandos!`;
+    return `Comando desconocido: "${cmd}"\nEscribe 'help' para ver los comandos!`;
   },
 });

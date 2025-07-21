@@ -2,9 +2,9 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "start": "bun run src/index.ts",
+    "start": "bun run src/server.ts",
     "build": "tsc --project tsconfig.json",
-    "dev": "bun run src/index.ts --watch",
+    "dev": "bun run src/server.ts --watch",
     "check": "biome check --write ."
   },
   "dependencies": {

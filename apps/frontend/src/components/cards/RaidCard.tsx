@@ -3,43 +3,57 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { type GuildInfoProps, GuildInfo } from './GuildInfo';
 import { API_BASE } from '@/consts';
 
-async function getGuild(guildId: string): Promise<GuildInfoProps> {
-  const response = await fetch(`${API_BASE}/guilds/${guildId}`);
-  if (!response.ok) throw Error('not found server!');
-  return response.json();
-}
+type Props = { guildId: string };
 
-export const GuildForm = () => {
-  const [lookupId, setLookupId] = useState('');
-  const [error, setError] = useState('');
-  const [guild, setGuild] = useState<GuildInfoProps | null>(null);
+export const RaidCard = ({ guildId }: Props) => {
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
+  const [ping, setPing] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const onClick = async () => {
-    if (!lookupId) return setError('please provide a guild id');
-    try {
-      const guildData = await getGuild(lookupId);
-      setGuild(guildData);
-      setError('');
-    } catch (err: any) {
-      console.error('Failed to fetch guild:', err);
-      setError(err?.message);
-      setGuild(null);
+    setError(null);
+    setSuccessMessage(null);
+
+    const res = await fetch(`${API_BASE}/raid?guildid=${guildId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        link,
+        ping,
+      }),
+    });
+
+    if (!guild)
+
+    if (!res.ok) {
+      const text = await res.text();
+      setError(text || `Error: ${res.status} ${res.statusText}`);
+      return;
     }
+
+    const data = await res.json();
+    setSuccessMessage(`Raid executed in guild ${guildId}:\n${JSON.stringify(data, null, 2)}`);
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <div className="flex flex-row gap-4">
-        <Input type="text" placeholder="Guild ID" onChange={(e) => setLookupId(e.target.value)} required />
-        <Button className="cursor-pointer" onClick={onClick} disabled={!lookupId}>
-          Lookup
-        </Button>
+        <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} required />
+        <Input type="text" placeholder="Link" onChange={(e) => setLink(e.target.value)} required />
+        <Input type="text" placeholder="Ping (true/false)" onChange={(e) => setPing(e.target.value)} required />
       </div>
-      {error && <p className="mt-2 text-destructive">{error}</p>}
-      <div className="mt-7">{guild && <GuildInfo {...guild} />}</div>
+      <Button size="sm" className="cursor-pointer" onClick={onClick} disabled={!name && !link && !ping}>
+        Raid
+      </Button>
+      {error && <p className="text-destructive whitespace-pre-wrap mt-2">{error}</p>}
+      {successMessage && <pre className="whitespace-pre-wrap mt-2">{successMessage}</pre>}
     </div>
   );
 };
