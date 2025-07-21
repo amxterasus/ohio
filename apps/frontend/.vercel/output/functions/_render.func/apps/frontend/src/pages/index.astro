@@ -1,0 +1,54 @@
+---
+import { Button } from '@/components/ui/button';
+import Layout from '../layouts/Layout.astro';
+import DevCard from '@/components/cards/DevCard.astro';
+import GuildList from '@/components/cards/GuildList';
+---
+
+<Layout>
+  <main
+    class="max-h-[40rem] relative w-full flex md:items-center md:justify-center overflow-hidden px-8 md:min-h-[40rem] md:border-b border-dashed bg-gradient-to-tl from-background to-accent/30"
+  >
+    <div class="overflow-hidden md:px-10 -mb-32 mt-[-4.75rem] pb-32 pt-[4.75rem]">
+      <div
+        class="lg:max-w-7xl mx-auto grid max-w-full grid-cols-1 items-center gap-x-6 gap-y-14 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-12"
+      >
+        <div class="relative z-10 md:text-center lg:text-left">
+          <div class="flex gap-x-4 items-center">
+            <span class="bg-foreground text-background px-0.5 text-sm">00.</span>
+            <h1 class="text-lg">Ohio</h1>
+          </div>
+          <p>Ohio the best discord bot raider</p>
+          <div class="mt-4 flex w-fit gap-4 font-sans flex-row md:justify-center lg:justify-start items-center">
+            <a href="/login">
+              <Button className="rounded-none cursor-pointer">Log In</Button>
+            </a>
+            <a
+              href="https://discord.com/oauth2/authorize?client_id=1386123405098483743&permissions=8&integration_type=0&scope=bot"
+              target="_blank"
+            >
+              <Button variant="outline" className="rounded-none cursor-pointer">Add Bot</Button>
+            </a>
+          </div>
+        </div>
+        <GuildList />
+      </div>
+    </div>
+  </main>
+  <section
+    class="max-w-3xl mt-10 mx-auto font-mono relative md:border-l-0 md:border-b-0 md:border-[1.2px] rounded-none -pr-2"
+  >
+    <div class="w-full md:mx-0">
+      <div class="px-3 py-2 -ml-2 absolute">
+        <div class="flex gap-x-4 items-center">
+          <span class="bg-foreground text-background px-0.5 text-sm">01.</span><h1 class="text-lg">Devs</h1>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 relative md:grid-rows-1 md:grid-cols-3 border-b-[1.2px]">
+        <DevCard id="1085280364601294870" name="Fifix" user="fifix." />
+        <DevCard id="659838596139974657" name="d monsi" user="asiancry" />
+        <DevCard id="776176694209413170" name="inferno" user="amxterasus" />
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,14 +1,14 @@
-import { Hono } from "hono";
-import { createBunWebSocket } from "hono/bun";
-import { client } from "../client";
-import { corsMiddleware } from "../middleware/cors";
-import { routes } from "./routes";
+import { Hono } from 'hono';
+import { createBunWebSocket } from 'hono/bun';
+import { client } from '../client';
+import { corsMiddleware } from '../middleware/cors';
+import { routes } from './routes';
 
 const app = new Hono();
 
 const { upgradeWebSocket, websocket } = createBunWebSocket();
 
-app.use("*", corsMiddleware);
+app.use('*', corsMiddleware);
 
 app.get(
   '/ws',
@@ -25,11 +25,11 @@ app.get(
   }),
 );
 
-app.route("/", routes);
+app.route('/', routes);
 
 export default {
   fetch: app.fetch,
   websocket,
 };
 
-export const handler = app.fetch
+export const handler = app.fetch;
