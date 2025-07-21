@@ -14,7 +14,8 @@ export const RaidCard = ({ guildId }: Props) => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const onClick = async () => {
+  const onClick = async (e: any) => {
+    e.preventDefault();
     setError(null);
     setSuccessMessage(null);
 
@@ -29,8 +30,6 @@ export const RaidCard = ({ guildId }: Props) => {
         ping,
       }),
     });
-
-    if (!guild)
 
     if (!res.ok) {
       const text = await res.text();
@@ -49,7 +48,7 @@ export const RaidCard = ({ guildId }: Props) => {
         <Input type="text" placeholder="Link" onChange={(e) => setLink(e.target.value)} required />
         <Input type="text" placeholder="Ping (true/false)" onChange={(e) => setPing(e.target.value)} required />
       </div>
-      <Button size="sm" className="cursor-pointer" onClick={onClick} disabled={!name && !link && !ping}>
+      <Button size="sm" className="cursor-pointer" onClick={(e) => onClick(e)} disabled={!name && !link && !ping}>
         Raid
       </Button>
       {error && <p className="text-destructive whitespace-pre-wrap mt-2">{error}</p>}
